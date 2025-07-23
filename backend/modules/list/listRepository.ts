@@ -12,6 +12,19 @@ export async function getLists(): Promise<List[]> {
   const [rows] = await client.query<RowDataPacket[]>("SELECT * FROM lists");
   return rows as List[];
     } catch (err) {
+        throw new Error("erreur lors de la récupération des listes");
+    }
+}
+
+// récupere toutes les listes
+export async function getListById(id: number): Promise<List | null> {
+    try {
+  const [rows] = await client.query<RowDataPacket[]>(
+    "SELECT * FROM lists WHERE id = ?",
+    [id]
+);
+  return rows.length > 0 ? (rows[0] as List) : null;
+    } catch (err) {
         throw new Error("erreur lors de la récupération de la liste");
     }
 }
@@ -19,15 +32,18 @@ export async function getLists(): Promise<List[]> {
 // creer une nouvelle liste
 export async function createList(
   title: string,
-): Promise<boolean> {
+): Promise<{ success:boolean; id?: number}> {
   try {
     const [result] = await client.query<ResultSetHeader>(
       "INSERT INTO lists (title) VALUES (?) ",
       [title],
     );
-    return result.affectedRows > 0;
+    return {
+        success: result.affectedRows > 0,
+        id: result.insertId
+    };
   } catch (err) {
-    throw new Error("erreur lors de la création de la liste");
+    throw new Error("impossible de créer la liste");
   }
 }
 
@@ -43,7 +59,7 @@ export async function updateList(
     );
     return result.affectedRows > 0;
   } catch (err) {
-    throw new Error("erreur lors de la modification de l'evenement");
+    throw new Error("impossible de modifier la liste");
   }
 }
 
