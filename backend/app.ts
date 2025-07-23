@@ -3,14 +3,15 @@ import cors from 'cors';
 import router from "./router";
 
 const app = express();
-app.use(router);
-app.use(express.json());
 
 app.use(cors({ 
-    origin: 'http://localhost:5173' 
+    origin: process.env.CLIENT_URL || 'http://localhost:5173' 
 }));
+app.use(express.json());
+app.use(router);
 
+const PORT = process.env.APP_PORT || 3310;
 
-app.listen(300, () => {
-    console.log("le backend tourne sur le port 3000")
+app.listen(PORT, () => {
+    console.log(`le backend tourne sur le port ${PORT}`)
 })

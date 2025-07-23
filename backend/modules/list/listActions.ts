@@ -1,6 +1,7 @@
 import type { RequestHandler } from "express";
 import {
   createList,
+  getListById,
   deleteList,
   getLists,
   updateList,
@@ -8,6 +9,7 @@ import {
 
 export const listsActions: {
   browse: RequestHandler;
+  read: RequestHandler;
   add: RequestHandler;
   update: RequestHandler;
   remove: RequestHandler;
@@ -17,12 +19,33 @@ export const listsActions: {
     try {
       const lists = await getLists();
       res.status(200).json(lists);
-      return;
     } catch (err) {
       res
         .status(500)
         .json({ err: "erreur lors de la recuperation des lists" });
-      return;
+    }
+  },
+
+//   recuperer une liste par ID
+  async read(req, res) {
+    try {
+        const listId = Number(req.params.id);
+        if (isNaN (listId) || listId < 0 ) {
+            return res.status(400).json({
+                error:"ID de liste invalide"
+            });
+        }
+      const list = await getListById(listId);
+      if (!list) {
+        return res.status(404).json({
+            error: "Liste non trouvée"
+        })
+      }
+      res.status(200).json(list);
+    } catch (err) {
+      res
+        .status(500)
+        .json({ err: "erreur lors de la recuperation des lists" });
     }
   },
 
@@ -30,15 +53,10 @@ export const listsActions: {
   async add(req, res) {
     try {
       const { title } = req.body;
-      if (!title) {
-        return res
-          .status(400)
-          .json({ message: "le titre de la liste est requis" });
-      }
 
       // creer la liste dans la bdd
       const create = await createList(
-        title
+        title.trim()
       );
       if (!create) {
         res
@@ -46,20 +64,18 @@ export const listsActions: {
           .json({ message: "erreur lors de la création de la liste" });
         return;
       }
-      res.status(201).json({ message: "liste créée avec succès !" });
-      return;
+      res.status(201).json({ message: "liste créée avec succès !", id: create.id });
     } catch {
       res
         .status(500)
-        .json({ message: "erreur lors de la création de l'événement" });
-      return;
+        .json({ message: "erreur lors de la création de la liste" });
     }
   },
 
   // modifier une liste
   async update(req, res) {
     try {
-      const listId = req.params.id;
+      const listId = Number(req.params.id);
       const { title } = req.body;
 
       const updated = await updateList(
@@ -81,7 +97,7 @@ export const listsActions: {
   // supprimer une liste
   async remove(req, res) {
     try {
-      const listId = req.params.id;
+      const listId = Number(req.params.id);
 
       const deleted = await deleteList(Number(listId));
       if (!deleted) {
