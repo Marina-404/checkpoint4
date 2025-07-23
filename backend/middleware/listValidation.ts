@@ -1,11 +1,11 @@
 import type { RequestHandler } from "express";
 import type { NextFunction, Request, Response } from "express";
 
-export const valideId: RequestHandler = (
+export function valideId (
     req: Request, 
     res: Response, 
     next: NextFunction
-) => {
+) {
     const id = Number(req.params.id);
     if (isNaN(id) || id < 0) {
         return res.status(400).json({
@@ -17,11 +17,11 @@ export const valideId: RequestHandler = (
 }
 
 // valider les données
-export const valideList: RequestHandler = (
+export function valideList (
     req: Request, 
     res: Response, 
     next: NextFunction
-) => {
+) {
     const { title } = req.body
     if (!title || typeof title !== "string") {
         return res.status(400).json({
