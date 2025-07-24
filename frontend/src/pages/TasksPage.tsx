@@ -15,7 +15,7 @@ type ListTasks = {
 };
 
 export default function TasksPage() {
-    const { id } = useParams<{ id: string}>();
+    const { id } = useParams<{id: string}>();
     const navigate = useNavigate();
 
     const [listWithTasks, setListWithTasks] = useState<ListTasks | null>(null);
@@ -26,13 +26,8 @@ export default function TasksPage() {
 
     const fetchListsTasks = async () => {
         if (!id) return; 
-        try {
         const res = await api.get(`/lists/${id}/full`);
-            console.log("Réponse de /lists/:id/full :", res.data); // A ENLEVER
             setListWithTasks(res.data);
-        } catch (err) {
-            console.error("Erreur lors du fetch des tâches :", err);
-        }
     };
 
     // ajouter une nouvelle tâche
@@ -68,15 +63,11 @@ export default function TasksPage() {
     }
 
     useEffect(() => {
-        // LOG A ENLEVER
-        console.log("listId reçu :", id); 
         if (id) fetchListsTasks();
     }, [id]);
 
     if (!listWithTasks) {
-        return <div> Chargement des tâches en cours...
-            <strong>listId reçu : {id}</strong> 
-        </div>
+        return <div> Chargement des tâches en cours...</div>
     }
 
 return (
