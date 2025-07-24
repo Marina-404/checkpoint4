@@ -5,10 +5,11 @@ import router from "./router";
 const app = express();
 
 app.use(cors({ 
-    origin: process.env.CLIENT_URL || 'http://localhost:5173' 
+    origin: ['http://localhost:5173'  , 'http://localhost:3000'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH']
 }));
 app.use(express.json());
-app.use(router);
+app.use("/api", router);
 
 const PORT = process.env.APP_PORT || 3310;
 
