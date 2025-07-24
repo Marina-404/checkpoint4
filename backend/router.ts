@@ -7,6 +7,7 @@ const router = express.Router();
 
 // les listes
 router.get("/lists", listsActions.browse);
+router.get("/lists/:id/full", valideId, listsActions.readFull);
 router.get("/lists/:id", valideId, listsActions.read);
 router.post("/lists", listsActions.add);
 router.put("/lists/:id",valideId, valideList, listsActions.update);

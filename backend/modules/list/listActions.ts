@@ -5,6 +5,7 @@ import {
   deleteList,
   getLists,
   updateList,
+  getListWithTasks
 } from "./listRepository";
 
 export const listsActions: {
@@ -13,6 +14,7 @@ export const listsActions: {
   add: RequestHandler;
   update: RequestHandler;
   remove: RequestHandler;
+  readFull: RequestHandler;
 } = {
   // on recupere les listes
   async browse(req, res) {
@@ -46,6 +48,22 @@ export const listsActions: {
       res
         .status(500)
         .json({ err: "erreur lors de la recuperation des lists" });
+    }
+  },
+
+  async readFull(req, res) {
+    const listId = Number(req.params.id);
+    if (!listId || listId < 0) {
+      return res.status(400).json({errpr: "ID de liste invalide"})
+    }
+    try {
+      const list = await getListWithTasks(listId);
+      if (!list) {
+        return res.status(404).json({error: "liste non trouvée"})
+      }
+      res.status(200).json(list)
+    } catch {
+      res.status(500).json({error: "erreur serveur"})
     }
   },
 
