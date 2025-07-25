@@ -1,0 +1,60 @@
+.landing-page {
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.landing-img {
+    width: 200px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.landing-title {
+    font-family: "MuseoModerno";
+    font-weight: 500;
+    font-size: 2.5rem;
+    color: #2e2e2e;
+    margin: 0;
+}
+
+.landing-Listie {
+    font-family: "DreamAvenue", sans-serif;
+    font-weight: 600;
+    letter-spacing: 5px;
+    font-size: 3rem;
+    color: #ca6666;
+    margin: 0;
+}
+
+.landing-description {
+    font-family: "MuseoModerno";
+    font-size: 1.2rem;
+    padding: 1.5rem;
+    color: #2e2e2e;
+    margin-bottom: 0px;
+    font-weight: 300;
+    max-width: 500px;
+}
+
+.landing-btn {
+    font-family: "MuseoModerno";
+    background-color: #ffdadb;
+    border: solid 2px #ca6666;
+    color: #1F1F1F;
+    font-size: 1.5rem;
+    font-weight: 500;
+    padding: 12px 30px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.landing-btn:hover {
+    background-color: #1F1F1F;
+    color: white;
+}
