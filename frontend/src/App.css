@@ -1,42 +1,87 @@
 #root {
   max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  margin: 0;
+  padding: 0;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+body {
+  background-color: #f7f7f7;
+  margin: 0;
+  padding: 0;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* fonts */
+
+/* MuseoModerno */
+@font-face {
+  font-family: 'MuseoModerno';
+  src: url('./assets/fonts/Museo/MuseoModerno-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+@font-face {
+  font-family: 'MuseoModerno';
+  src: url('./assets/fonts/Museo/MuseoModerno-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
 }
 
-.card {
-  padding: 2em;
+@font-face {
+  font-family: 'MuseoModerno';
+  src: url('./assets/fonts/Museo/MuseoModerno-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
 }
 
-.read-the-docs {
-  color: #888;
+@font-face {
+  font-family: 'MuseoModerno';
+  src: url('./assets/fonts/Museo/MuseoModerno-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
 }
+
+@font-face {
+  font-family: 'MuseoModerno';
+  src: url('./assets/fonts/Museo/MuseoModerno-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+}
+
+/* Fredoka */
+@font-face {
+  font-family: 'Fredoka';
+  src: url('./assets/fonts/fredoka/Fredoka_Condensed-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fredoka';
+  src: url('./assets/fonts/fredoka/Fredoka_Condensed-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fredoka';
+  src: url('./assets/fonts/fredoka/Fredoka_Condensed-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fredoka';
+  src: url('./assets/fonts/fredoka/Fredoka_Condensed-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'DreamAvenue';
+  src: url('./assets/fonts/dream/Dream-Avenue.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+

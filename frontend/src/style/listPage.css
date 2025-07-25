@@ -1,0 +1,245 @@
+.lists-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow: hidden;
+}
+
+.header-section {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 2rem 0 2rem;
+    position: relative;
+}
+
+.icon-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: -50px;
+}
+
+.title-date-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.app-icon {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    margin-top: -20px;
+}
+
+.title {
+    font-family: 'MuseoModerno';  
+    letter-spacing: 1px;
+    font-weight: 600;
+    font-size: 2.2rem;
+    text-align: left;
+    margin: 0;
+    color: #2e2e2e;
+}
+.date {
+    font-size: 1.1rem;
+    text-align: left;
+    margin: 0;
+    color: #000000;
+    font-family: 'MuseoModerno';
+    font-weight: 300;
+}
+
+.section-list {
+    padding: 10px 0;
+    border-radius: 45px 45px 0 0;
+    height: auto;
+    width: 100vw;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.list-item {
+    margin: 35px;
+    padding: 1px 0;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgb(202, 202, 202);
+}
+
+.list-title {
+    font-family: "MuseoModerno";
+    font-weight: 500;
+    text-align: left;
+    font-size: 1.3rem;
+    color: #000000;
+    cursor: pointer;
+    padding-left: 2rem;
+    margin: 15px;
+}
+
+.list-title:hover {
+    text-decoration: underline;
+}
+
+.edit-input {
+    padding: 5px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.section-edit-cancel {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+button:hover {
+    background-color: #1f1f1f;
+    color: white;
+}
+
+.btn-edit {
+    padding: 3px 10px;
+    font-family: "MuseoModerno";
+    background-color: #d3d3d3;
+    border: solid 1px #d3d3d3;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    margin-right: 1px;
+    transition: 0.1s;
+}
+.btn-edit:hover {    
+    background-color: #b4fdbe;
+    border: solid 1px #6eaa76;
+    color: black;
+}
+
+.btn-delete {
+    padding: 3px 10px;
+    font-family: "MuseoModerno";
+    background-color: #d3d3d3;
+    border: solid 1px #d3d3d3;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    margin-left: 2px;
+    transition: 0.1s;
+}
+
+.btn-delete:hover {
+    background-color: #fdb4b4;
+    border: solid 1px #b37e7e;
+    color: black;
+}
+
+.add-list-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px auto 0;
+    width: 100%;
+    border-radius: 10px;
+    box-sizing: border-box;
+    max-width: 300px;
+}
+
+.new-list-input {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+}
+
+.btn-add {
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    background-color: #b4fdbe;
+    color: black;
+    padding: 10px;
+    flex: 1;
+    border-radius: 10px;
+    border: solid 1px #74a17a;
+    transition: 0.1s;
+}
+
+.btn-add:hover {
+    background-color: transparent;
+    border: solid 1px transparent;
+    color: #000000;
+}
+.btn-save, 
+.btn-cancel {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0; 
+}
+
+.btn-save {
+    background-color: #b4fdbe;
+    border: solid 1px #6eaa76;
+    color: black;
+}
+.btn-cancel {
+    background-color: #d8d8d8;
+    border: solid 1px #adadad;
+    color: black;
+}
+.add-list-form input,
+.add-list-form button {
+    margin-bottom: 15px;
+}
+.edit-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 2rem;
+}
+
+.edit-input {
+    flex-grow: 1;
+}
+
+.edit-buttons {
+    display: flex;
+    gap: 5px;
+}
+.btn-add-new {
+    color: rgb(0, 0, 0);
+    background-color: #f7f7f7;
+    letter-spacing: 1px;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    max-width: 350px;
+    width: 100%;
+    margin: 5px auto;
+    display: block;
+    border: none;
+    transition: 0.2s;
+}
+
+.btn-add-new:hover {
+    background-color: #f7f7f7;
+    color: rgb(119, 119, 119);
+}
+.btn-cancel-x {
+    background-color: #a8a8a8;
+    color: black;
+    padding: 10px;
+    border-radius: 10px;
+    margin-left: 0.5rem;
+    margin-right: auto;
+}
+
+.btn-cancel-x:hover {
+    background-color: #1f1f1f;
+}

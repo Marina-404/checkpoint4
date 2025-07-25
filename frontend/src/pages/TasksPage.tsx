@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
 import { useNavigate, useParams } from "react-router-dom";
+import { IoReturnDownBackOutline } from "react-icons/io5";
+import "../style/taskPage.css";
+import "../style/listPage.css";
+import icon from "../assets/icon.png";
 
 type Task = {
     id: number;
@@ -70,58 +74,100 @@ export default function TasksPage() {
         return <div> Chargement des tâches en cours...</div>
     }
 
+    const couleurs = ["#FFC0C0", "#D5D9FF", "#f7f7a6ff", "#C4FFE7"];
+
+    const getColorById = (id: number) => {
+    return couleurs[id % couleurs.length];
+    };
+
 return (
-    <div>
-        <button onClick={() => navigate("/lists")}>Retour</button>
-        <h1>{listWithTasks.title}</h1>
-        <p>
+    <div className="task-page">
+        <div className="header-section">
+            <div className="icon-container">
+                <img src={icon} alt="App Icon" className="app-icon" />
+             </div>
+            <button className="btn-back" onClick={() => navigate("/lists")}><IoReturnDownBackOutline /></button>
+        </div>
+        <h1 className="task-list-title">{listWithTasks.title}</h1>
+        <p className="task-count">
             {listWithTasks.tasks.filter(t => t.is_done).length} / {listWithTasks.tasks.length} tâches terminées
         </p>
         {listWithTasks.tasks.map((task) => (
-            <div key={task.id}>
+            <div 
+            key={task.id} 
+            className="task-item"
+             style={{ backgroundColor: getColorById(task.id)}}
+            >
+                <div className="task-main">
                     <input 
+                        className="custom-checkbox"
                         type="checkbox"
                         checked={task.is_done}
                         onChange={() => toggleTask(task.id)} 
                     />
                     {edit === task.id ? (
                         <>
-                        <input 
+                        <input
+                            className="task-edit-input" 
                             value={editTitle}
                             onChange={(e)=> setEditTitle(e.target.value)} 
-                            onKeyDown={(e) => e.key === "Enter" && updateTask(task.id)}
                          />
-                        <button onClick={() => updateTask(task.id)}>V</button>
-                        <button onClick={() => setEdit(null)}>X</button>
-                    </>
+                        </>
                 ) : (
-                    <span onClick={() => {
-                        setEdit(task.id);
-                        setEditTitle(task.title);
+                    <span 
+                        className="task-title"
+                        onClick={() => {
+                            setEdit(task.id);
+                            setEditTitle(task.title);
                     }}>
                         {task.title}
                     </span>  
                 )}
-                <button onClick={() => deleteTask(task.id)}>Supprimer</button>
+                </div>
+                    <div className="task-button">
+                        {edit === task.id ? (
+                            <>
+                                <button type="button" className="btn-save-task" onClick={() => updateTask(task.id)}>V</button>
+                                <button className="btn-cancel-task" onClick={() => setEdit(null)}>X</button>
+                            </>
+                        ) : (
+                        <button className="btn-delete-task" onClick={() => deleteTask(task.id)}>X</button>
+                    )}</div>
                 </div> 
             ))}
                 
-                <div>
+                <div className="task-add-section">
                 {input ? (
-                    <div>
-                        <input placeholder="Nouvelle tâche"
-                        value={newTitle}
-                        onChange={(e) => setNewTitle(e.target.value)} 
-                        onKeyDown={(e) => e.key === "Enter" && addTask()}
+                    <div className="task-input-container">
+                        <input
+                            className="task-input" 
+                            placeholder="Nouvelle tâche"
+                            value={newTitle}
+                            onChange={(e) => setNewTitle(e.target.value)} 
                         />
-                        <button onClick={addTask}>+ Ajouter la tâche</button>
-                        <button onClick={() => { 
-                            setInput(false); 
-                            setNewTitle("")
-                        }}>X</button>
+                        <div className="add-cancel-section-task">
+                            <button 
+                                className="btn-add-task" 
+                                onClick={addTask}
+                            >
+                                + Ajouter la tâche
+                            </button>
+                            <button
+                                className="btn-cancel-task" 
+                                onClick={() => { 
+                                    setInput(false); 
+                                    setNewTitle("")
+                            }}
+                            >
+                                X
+                            </button>
+                        </div>
                     </div>
                 ) : (
-                    <button onClick={() => setInput(true)}>
+                    <button
+                        className="btn-add-new-task" 
+                        onClick={() => setInput(true)}
+                    >
                         + nouvelle tâche
                     </button>
                 )}

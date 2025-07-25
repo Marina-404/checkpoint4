@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
 import { useNavigate } from "react-router-dom";
+import "../style/listPage.css";
+import icon from "../assets/icon.png";
 
 type List = {
     id: number;
@@ -52,43 +54,75 @@ export default function ListsPage() {
         fetchLists();
     }, []);
 
+    const date = new Date();
+    const formatDate = `${date.getDate()} ${date.toLocaleString("default", {month:"long"})} ${date.getFullYear()}`;
+
+    const couleurs = ["#FFC0C0", "#D5D9FF", "#f7f7a6ff", "#C4FFE7"];
+    const getColorById = (id: number) => {
+    return couleurs[id % couleurs.length];
+};
+
 return (
-    <div>
-        <h1>Mes Listes</h1>
+    <div className="lists-page">
+        <div className="header-section">
+            <div className="icon-container">
+                <img src={icon} alt="App Icon" className="app-icon" />
+            </div>
+            <div className="title-date-container">
+                <h1 className="title">Mes Listes</h1>
+                <p className="date"> {formatDate}</p>
+            </div>
+        </div>
+        <div className="section-list">
         {list.map((lists) => (
-            <div key={lists.id}>
+            <div 
+            key={lists.id} 
+            className="list-item"
+            style={{ backgroundColor: getColorById(lists.id)}}
+            >
                 {edit === lists.id ? (
-                    <>
-                    <input 
-                    value={editTitle}
-                    onChange={(e) => setEditTitle(e.target.value)} 
-                    />
-                    <button onClick={() => updateList(lists.id)}>V</button>
-                    <button onClick={() => setEdit(null)}>X</button>
-                    </>
+                    <div className="edit-container">
+                        <input
+                        className="edit-input" 
+                        value={editTitle}
+                        onChange={(e) => setEditTitle(e.target.value)} 
+                        />
+                        <div className="edit-buttons">
+                            <button className="btn-save" onClick={() => updateList(lists.id)}>V</button>
+                            <button className="btn-cancel" onClick={() => setEdit(null)}>X</button>
+                        </div>
+                    </div>
                 ) : (
-                    <>
+                    <div>
                         <h3
+                        className="list-title"
                         onClick={() => openList(lists.id)}>
                             {lists.title}
                         </h3>
-                        <button onClick={() => { setEdit(lists.id); setEditTitle(lists.title)}}>Modifier</button>
-                        <button onClick={() => deleteList(lists.id)}>Supprimer</button>
-                    </>
+                        <div className="section-edit-cancel">
+                            <button className="btn-edit" onClick={() => { setEdit(lists.id); setEditTitle(lists.title)}}>Modifier</button>
+                            <button className="btn-delete" onClick={() => deleteList(lists.id)}>Supprimer</button>
+                        </div>
+                    </div>
                 )}
             </div> 
         ))}
         {input ? (
-            <div>
-                <input placeholder="Nouvelle Liste"
+            <div className="add-list-form">
+                <input 
+                className="new-list-input"
+                placeholder="Nouvelle Liste"
                 value={newTitle}
                 onChange={(e) => setNewTitle(e.target.value)} />
-                <button onClick={addList}>+ Ajouter à la liste</button>
-                <button onClick={() => setInput(false)}>X</button>
+                <div className="add-cancel-section">
+                    <button className="btn-add" onClick={addList}>+ Ajouter à la liste</button>
+                    <button className="btn-cancel-x" onClick={() => setInput(false)}>X</button>
+                </div>
             </div>
         ) : (
-            <button onClick={() => setInput(true)}>+ Ajouter une autre liste</button>
+            <button className="btn-add-new" onClick={() => setInput(true)}>+ Ajouter une autre liste</button>
         )}
+        </div>
     </div>
 );
     

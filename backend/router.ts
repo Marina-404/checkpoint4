@@ -17,7 +17,7 @@ router.delete("/lists/:id", valideId, listsActions.remove);
 router.get("/lists/:listId/tasks", valideListId, tasksActions.browse);
 router.get("/tasks/:id", valideTaskId, tasksActions.read);
 router.post("/tasks", valideDataTask, tasksActions.add);
-router.post("/tasks/:id", valideTaskId, valideDataTask, tasksActions.update);
+router.put("/tasks/:id", valideTaskId, valideDataTask, tasksActions.update);
 router.patch("/tasks/:id/toggle", valideTaskId, tasksActions.toggle);
 router.delete("/tasks/:id", valideTaskId, tasksActions.remove);
 
